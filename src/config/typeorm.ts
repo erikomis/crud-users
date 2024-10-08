@@ -13,7 +13,7 @@ const dataSourceOptions: DataSourceOptions = {
   database: process.env.DB_NAME,
   entities: ['dist/**/*.entity{.ts,.js}'],
   migrations: ['dist/migrations/*{.ts,.js}'],
-  migrationsRun: true,
+  migrationsRun: false,
   synchronize: false,
 };
 
