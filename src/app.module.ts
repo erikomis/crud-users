@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { CacheModuleProject } from './cache/cache.module';
 import typeorm from './config/typeorm';
+import { KafkaModule } from './kafka/kafka.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import typeorm from './config/typeorm';
     }),
     UserModule,
     CacheModuleProject,
+    KafkaModule,
   ],
 })
 export class AppModule {}
