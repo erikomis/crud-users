@@ -23,7 +23,7 @@ jobs:
         with:
           context: '{{defaultContext}}'
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/production-review:latest, ${{ secrets.DOCKER_USERNAME }}/production-review:${{ github.run_number }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/crud-users:latest, ${{ secrets.DOCKER_USERNAME }}/crud-users:${{ github.run_number }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
       - name: Deploy to vps
