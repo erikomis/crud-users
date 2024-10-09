@@ -11,15 +11,21 @@ export class GetByIdUserUseCase {
   ) {}
 
   async execute(id: number): Promise<UserEntity> {
-    const cachedUser = await this.cacheManager.getCache<UserEntity>(
+    const cachedUser = await this.cacheManager.getCacheByKey<UserEntity>(
       `user:${id}`,
-      async () => await this.userRepository.findById(id),
     );
 
-    if (!cachedUser) {
+    if (cachedUser) {
+      return cachedUser;
+    }
+    const user = await this.userRepository.findById(id);
+
+    if (!user) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
 
-    return cachedUser;
+    await this.cacheManager.setCache(`user:${id}`, user);
+
+    return user;
   }
 }
