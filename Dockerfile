@@ -1,7 +1,7 @@
 FROM node:20.8 AS builder
 
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json ./
 
@@ -13,21 +13,16 @@ COPY . .
 # Compila o projeto
 RUN npm run build
 
-FROM node:18 AS production
+FROM node:20.8 AS production
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 
-COPY --from=builder /usr/src/app/dist ./dist
-COPY --from=builder /usr/src/app/package*.json ./
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/package*.json ./
 
 
 RUN npm install --only=production
-
-
-COPY --from=builder /usr/src/app/migrations ./migrations
-
-RUN npm run typeorm migration:run
 
 
 ENV PORT=3000

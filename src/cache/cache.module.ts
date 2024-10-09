@@ -7,7 +7,7 @@ import { CacheService } from './cache.service';
     CacheModule.register({
       isGlobal: true,
       store: redisStore,
-      host: 'localhost',
+      host: 'redis',
       port: 6379,
     }),
   ],

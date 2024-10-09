@@ -16,7 +16,7 @@ import { LogRepositoryImpl } from './repository/log.repositoryImpl';
         options: {
           client: {
             clientId: 'my-kafka-client',
-            brokers: ['localhost:9092'],
+            brokers: ['kafka:9092'],
           },
           consumer: {
             groupId: 'my-kafka-consumer',
