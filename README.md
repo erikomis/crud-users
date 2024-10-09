@@ -44,7 +44,7 @@ Esta aplicação é construída utilizando o framework **NestJS** e integra vár
 Clone o repositório do projeto para sua máquina local:
 
 ```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
+git clone git@github.com:erikomis/crud-users.git
 ```
 ## Passo 2: Subir os Serviços com Docker
 
