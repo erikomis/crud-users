@@ -29,7 +29,10 @@ export class CreateUserUseCase {
       updateAt: userCreated.updateAt,
       action: 'create',
     });
-    await this.cacheManager.getCacheByKey<UserEntity>(`user:${userCreated.id}`);
+
+    await this.cacheManager.deleteCache('user_list');
+
+    await this.cacheManager.setCache(`user:${userCreated.id}`, userCreated);
 
     return userCreated;
   }
