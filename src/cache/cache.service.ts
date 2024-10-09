@@ -14,9 +14,11 @@ export class CacheService {
     functionRequest: () => Promise<T>,
   ) {
     const allData: T = await this.cacheManager.get(key);
+    console.log('allData', allData);
 
-    if (!allData) {
+    if (!allData || (Array.isArray(allData) && allData.length === 0)) {
       const data = await functionRequest();
+
       await this.cacheManager.set(key, data);
       return data;
     }
@@ -38,5 +40,9 @@ export class CacheService {
     } catch (error) {
       throw new Error(`Cache delete error: ${error.message}`);
     }
+  }
+
+  async getCacheByKey<T>(key: string): Promise<T> {
+    return await this.cacheManager.get(key);
   }
 }
