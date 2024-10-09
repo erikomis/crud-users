@@ -8,28 +8,28 @@ import { Injectable } from '@nestjs/common';
 export class UserRepositoryImpl implements UserRepository {
   constructor(
     @InjectRepository(UserEntity)
-    private readonly userEUserEntityRepository: Repository<UserEntity>,
+    private readonly userRepository: Repository<UserEntity>,
   ) {}
   create(user: UserEntity): Promise<UserEntity> {
-    const newUser = this.userEUserEntityRepository.create(user);
-    return this.userEUserEntityRepository.save(newUser);
+    const newUser = this.userRepository.create(user);
+    return this.userRepository.save(newUser);
   }
   findByEmail(email: string): Promise<UserEntity> {
-    return this.userEUserEntityRepository.findOne({ where: { email } });
+    return this.userRepository.findOne({ where: { email } });
   }
   findById(id: number): Promise<UserEntity> {
-    return this.userEUserEntityRepository.findOne({
+    return this.userRepository.findOne({
       where: { id },
     });
   }
   update(user: UserEntity): Promise<UserEntity> {
-    return this.userEUserEntityRepository.save(user);
+    return this.userRepository.save(user);
   }
   delete(id: number): Promise<void> {
-    this.userEUserEntityRepository.delete(id);
+    this.userRepository.delete(id);
     return;
   }
   findAll(): Promise<UserEntity[]> {
-    return this.userEUserEntityRepository.find();
+    return this.userRepository.find();
   }
 }
