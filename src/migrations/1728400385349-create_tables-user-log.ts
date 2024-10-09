@@ -16,6 +16,7 @@ export class CreateTablesUserLog1728400385349 implements MigrationInterface {
     await queryRunner.query(
       ` 
             CREATE TABLE public.log (
+                action VARCHAR(255) NOT NULL,
                 id SERIAL PRIMARY KEY,
                 data TEXT NOT NULL,
                 created_at TIMESTAMP NOT NULL DEFAULT now()
