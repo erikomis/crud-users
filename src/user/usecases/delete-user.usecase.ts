@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UserRepositoryImpl } from '../repository/user-repository-impl';
 import { CacheService } from '../../cache/cache.service';
 
@@ -13,7 +13,7 @@ export class DeleteUserUseCase {
     const user = await this.userRepository.findById(id);
 
     if (!user) {
-      throw new Error('User not found');
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
     await this.userRepository.delete(id);
     await this.cacheManager.deleteCache(`user:${id}`);
