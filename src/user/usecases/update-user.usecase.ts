@@ -3,6 +3,7 @@ import { UserRepositoryImpl } from '../repository/user-repository-impl';
 import { CacheService } from '../../cache/cache.service';
 import { UserEntity } from '../entity/user.entity';
 import { KafkaProducer } from '../../kafka/producer/kafka.producer';
+import { BcriptServiceImpl } from '../hash/Bcript.service';
 
 @Injectable()
 export class UpdateUserUseCase {
@@ -10,6 +11,7 @@ export class UpdateUserUseCase {
     private userRepository: UserRepositoryImpl,
     private cacheManager: CacheService,
     private kafkaProducer: KafkaProducer,
+    private bcript: BcriptServiceImpl,
   ) {}
   private readonly userListCacheKey = 'user_list';
   async execute(id: number, user: UserEntity): Promise<UserEntity> {
@@ -18,7 +20,14 @@ export class UpdateUserUseCase {
     if (!userExists) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
-    user.id = id;
+
+    const existsEmail = await this.userRepository.findByEmail(user.email);
+    if (existsEmail) {
+      throw new HttpException('Email already exists', HttpStatus.CONFLICT);
+    }
+
+    user.id = Number(id);
+    user.password = await this.bcript.generate(user.password);
 
     const userUpdate = await this.userRepository.update(user);
     await this.kafkaProducer.sendMessage('my-kafka-consumer', {

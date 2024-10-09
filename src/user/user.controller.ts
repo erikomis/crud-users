@@ -21,6 +21,7 @@ import { CreateUserUseCase } from './usecases/create-user.usecase';
 import { ListUsersUseCase } from './usecases/list-users.usecase';
 import { GetByIdUserUseCase } from './usecases/get-by-id-user.usecase';
 import { DeleteUserUseCase } from './usecases/delete-user.usecase';
+import { UpdateUserUseCase } from './usecases/update-user.usecase';
 
 @Controller('api/v1/users')
 export class UserController {
@@ -29,6 +30,7 @@ export class UserController {
     private listUsersUseCase: ListUsersUseCase,
     private getUserUseCase: GetByIdUserUseCase,
     private deleteUserUseCase: DeleteUserUseCase,
+    private updateUserUseCase: UpdateUserUseCase,
   ) {}
 
   @Post('/create')
@@ -89,7 +91,7 @@ export class UserController {
   @ApiBadRequestResponse({ status: 400, description: 'User not found' })
   async update(@Param('id') id: number, @Body() user: UserRequestDto) {
     const userEntity = UserMapper.toEntity(user);
-    const userService = await this.createUserUseCase.execute(userEntity);
+    const userService = await this.updateUserUseCase.execute(id, userEntity);
     return UserMapper.toDto(userService);
   }
 }

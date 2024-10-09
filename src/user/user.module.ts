@@ -10,6 +10,7 @@ import { CacheModuleProject } from '../cache/cache.module';
 import { GetByIdUserUseCase } from './usecases/get-by-id-user.usecase';
 import { BcriptServiceImpl } from './hash/Bcript.service';
 import { KafkaModule } from '../kafka/kafka.module';
+import { UpdateUserUseCase } from './usecases/update-user.usecase';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { KafkaModule } from '../kafka/kafka.module';
   providers: [
     UserRepositoryImpl,
     CreateUserUseCase,
+    UpdateUserUseCase,
     ListUsersUseCase,
     CreateUserUseCase,
     DeleteUserUseCase,
