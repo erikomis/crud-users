@@ -8,8 +8,6 @@ export class KafkaController {
 
   @MessagePattern('my-kafka-consumer')
   async consume(@Payload() message) {
-    console.log('Mensagem recebida:', message);
-    // Chama o caso de uso para criar o log
     return await this.createLogUseCase.execute(message);
   }
 }
