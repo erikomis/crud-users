@@ -1,73 +1,71 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# NestJS Application with PostgreSQL, Kafka, Redis, Swagger, and Docker
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Descrição
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Esta aplicação é construída utilizando o framework **NestJS** e integra várias tecnologias como **PostgreSQL**, **Kafka**, **Redis** e **Swagger** para oferecer uma API funcional e robusta. O objetivo desta aplicação é demonstrar a integração de sistemas de mensagens distribuídas, armazenamento em cache, e a documentação das APIs com Swagger, garantindo um ambiente de desenvolvimento isolado e replicável com Docker.
 
-## Description
+## Tecnologias Utilizadas
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **NestJS**: Framework principal para construção da aplicação.
+- **PostgreSQL**: Banco de dados relacional utilizado para persistência de dados.
+- **Kafka**: Sistema de mensagens distribuídas usado para processamento em tempo real.
+- **Redis**: Utilizado para cache de dados e gerenciamento de sessões.
+- **Swagger**: Ferramenta para documentação e teste das APIs.
+- **Docker & Docker Compose**: Para configurar o ambiente de desenvolvimento de forma simples e eficiente.
 
-## Installation
+## Funcionalidades
 
-```bash
-$ npm install
-```
+### Módulo de Usuários
+- CRUD completo (criação, leitura, atualização e exclusão) para a entidade de usuários.
+- Armazenamento dos dados de usuários no banco de dados **PostgreSQL**.
+- Uso de **entities** e **DTOs** para a estruturação correta dos dados.
 
-## Running the app
+### Integração com Kafka
+- **Produtor Kafka** envia eventos quando um usuário é criado ou atualizado.
+- **Consumidor Kafka** processa eventos para realizar ações adicionais na aplicação, como logging ou auditoria.
 
-```bash
-# development
-$ npm run start
+### Documentação com Swagger
+- Toda a API está documentada utilizando **Swagger**.
+- Rotas podem ser testadas diretamente pela interface do Swagger.
 
-# watch mode
-$ npm run start:dev
+### Cache com Redis
+- Implementação de uma estratégia de cache para otimizar o acesso a dados frequentemente requisitados.
+- Configuração de cache para consultas específicas utilizando **Redis**.
 
-# production mode
-$ npm run start:prod
-```
+## Pré-requisitos
 
-## Test
+- **Docker** e **Docker Compose** instalados.
+- **Node.js 20.9** (Utilizar **NVM** para gerenciar a versão do Node).
+
+## Como Iniciar o Projeto
+
+### Passo 1: Clonar o Repositório
+
+Clone o repositório do projeto para sua máquina local:
 
 ```bash
-# unit tests
-$ npm run test
+git clone https://github.com/seu-usuario/seu-repositorio.git
+```
+## Passo 2: Subir os Serviços com Docker
 
-# e2e tests
-$ npm run test:e2e
+Utilize o Docker Compose para subir todos os serviços necessários, como PostgreSQL, Redis, Kafka e a própria aplicação:
 
-# test coverage
-$ npm run test:cov
+```bash
+docker-compose up --build
 ```
 
-## Support
+## Passo 3: Acessar a Aplicação
+A aplicação NestJS estará rodando no endereço:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+http://localhost:3000
+```
 
-## Stay in touch
+## Passo 4: Acessar o Swagger
+Para acessar a documentação interativa da API, utilize o Swagger disponível no seguinte endereço:
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash
+http://localhost:3000/api
+```
 
-## License
-
-Nest is [MIT licensed](LICENSE).
+Nessa interface, você poderá visualizar todas as rotas disponíveis, testar as funcionalidades da API diretamente pela página e verificar os detalhes de cada endpoint.
