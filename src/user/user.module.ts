@@ -8,9 +8,15 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from './entity/user.entity';
 import { CacheModuleProject } from '../cache/cache.module';
 import { GetByIdUserUseCase } from './usecases/get-by-id-user.usecase';
+import { BcriptServiceImpl } from './hash/Bcript.service';
+import { KafkaModule } from '../kafka/kafka.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserEntity]), CacheModuleProject],
+  imports: [
+    TypeOrmModule.forFeature([UserEntity]),
+    CacheModuleProject,
+    KafkaModule,
+  ],
   controllers: [UserController],
   providers: [
     UserRepositoryImpl,
@@ -19,6 +25,7 @@ import { GetByIdUserUseCase } from './usecases/get-by-id-user.usecase';
     CreateUserUseCase,
     DeleteUserUseCase,
     GetByIdUserUseCase,
+    BcriptServiceImpl,
   ],
 })
 export class UserModule {}
