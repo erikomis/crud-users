@@ -14,7 +14,6 @@ export class CacheService {
     functionRequest: () => Promise<T>,
   ) {
     const allData: T = await this.cacheManager.get(key);
-    console.log('allData', allData);
 
     if (!allData || (Array.isArray(allData) && allData.length === 0)) {
       const data = await functionRequest();
