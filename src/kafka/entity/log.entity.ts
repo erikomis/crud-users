@@ -17,12 +17,4 @@ export class LogEntity {
     default: () => 'CURRENT_TIMESTAMP',
   })
   created_At: Date;
-
-  @Column({
-    name: 'updated_at',
-    type: 'timestamp',
-    default: () => 'CURRENT_TIMESTAMP',
-    onUpdate: 'CURRENT_TIMESTAMP',
-  })
-  updated_At: Date;
 }
