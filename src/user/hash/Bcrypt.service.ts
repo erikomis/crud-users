@@ -3,7 +3,7 @@ import * as bcrypt from 'bcrypt';
 import { HashService } from './hash';
 
 @Injectable()
-export class BcriptServiceImpl implements HashService {
+export class BcryptServiceImpl implements HashService {
   generate(value: string): Promise<string> {
     return bcrypt.hash(value, 10);
   }

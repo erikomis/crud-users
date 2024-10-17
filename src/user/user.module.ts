@@ -8,7 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from './entity/user.entity';
 import { CacheModuleProject } from '../cache/cache.module';
 import { GetByIdUserUseCase } from './usecases/get-by-id-user.usecase';
-import { BcriptServiceImpl } from './hash/Bcript.service';
+import { BcryptServiceImpl } from './hash/Bcrypt.service';
 import { KafkaModule } from '../kafka/kafka.module';
 import { UpdateUserUseCase } from './usecases/update-user.usecase';
 
@@ -27,7 +27,7 @@ import { UpdateUserUseCase } from './usecases/update-user.usecase';
     CreateUserUseCase,
     DeleteUserUseCase,
     GetByIdUserUseCase,
-    BcriptServiceImpl,
+    BcryptServiceImpl,
   ],
 })
 export class UserModule {}

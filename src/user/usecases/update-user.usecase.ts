@@ -3,7 +3,7 @@ import { UserRepositoryImpl } from '../repository/user-repository-impl';
 import { CacheService } from '../../cache/cache.service';
 import { UserEntity } from '../entity/user.entity';
 import { KafkaProducer } from '../../kafka/producer/kafka.producer';
-import { BcriptServiceImpl } from '../hash/Bcript.service';
+import { BcryptServiceImpl } from '../hash/Bcrypt.service';
 
 @Injectable()
 export class UpdateUserUseCase {
@@ -11,7 +11,7 @@ export class UpdateUserUseCase {
     private userRepository: UserRepositoryImpl,
     private cacheManager: CacheService,
     private kafkaProducer: KafkaProducer,
-    private bcript: BcriptServiceImpl,
+    private bcrypt: BcryptServiceImpl,
   ) {}
   private readonly userListCacheKey = 'user_list';
   async execute(id: number, user: UserEntity): Promise<UserEntity> {
@@ -27,7 +27,7 @@ export class UpdateUserUseCase {
     }
 
     user.id = Number(id);
-    user.password = await this.bcript.generate(user.password);
+    user.password = await this.bcrypt.generate(user.password);
 
     const userUpdate = await this.userRepository.update(user);
     await this.kafkaProducer.sendMessage('my-kafka-consumer', {
